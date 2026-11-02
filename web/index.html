@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bunny EQ — Tanchjim Bunny DSP</title>
+<meta name="description" content="Set the 5-band EQ on a Tanchjim Bunny DSP straight from the browser, with tunings from the Tanchjim community.">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23e7c27d'/><path d='M8 19c1.5-7 3.5 4 5.5-1s3.5 4 5.5-1 3 3 5 0' stroke='%23111215' fill='none' stroke-width='2' stroke-linecap='round'/></svg>">
+</head>
+<body>
+<header>
+  <div class="brand">
+    <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+      <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M8 19c1.5-7 3.5 4 5.5-1s3.5 4 5.5-1 3 3 5 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <div class="wordmark">
+      <strong>BUNNY EQ</strong>
+      <span>5-band tuner for the Tanchjim Bunny DSP</span>
+    </div>
+  </div>
+  <div class="device">
+    <span id="status" class="status">Not connected</span>
+    <button id="connect" class="primary">Connect</button>
+  </div>
+</header>
+
+<main>
+  <section class="card">
+    <div class="cardhead">
+      <h2>Response</h2>
+      <span class="hint">Drag a dot to move its band</span>
+    </div>
+    <canvas id="curve"></canvas>
+    <div id="bands" class="bands"></div>
+    <div class="mic">
+      <label for="mic">Mic gain</label>
+      <input id="mic" type="range" min="-15" max="15" step="1" value="1">
+      <output id="micval">1 dB</output>
+    </div>
+    <div class="actions">
+      <button id="apply" class="primary" disabled>Apply to earbuds</button>
+      <button id="flash" disabled>Save to flash</button>
+      <button id="save">Save preset</button>
+      <span id="msg" class="msg"></span>
+    </div>
+    <p class="note">Apply changes the sound live. Save to flash keeps it after unplugging — the dongle
+      restarts to commit, so audio switches to the laptop for a second or two.</p>
+  </section>
+
+  <section class="card">
+    <div class="tabs" role="tablist">
+      <button data-tab="community" class="active" role="tab">Community</button>
+      <button data-tab="official" role="tab">Official</button>
+      <button data-tab="mine" role="tab">My presets</button>
+    </div>
+    <input id="search" type="search" placeholder="Search community tunings" autocomplete="off">
+    <div id="list" class="list"></div>
+    <button id="more" class="ghost">Load more</button>
+  </section>
+</main>
+
+<p class="foot">
+  Reads and writes the EQ stored on the dongle. Community tunings come from Tanchjim's own
+  preset service. Needs Chrome or Edge (WebHID); audio keeps working while connected.
+</p>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

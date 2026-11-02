@@ -1,0 +1,11 @@
+# Reverse-engineering leftovers, not part of the project
+app.apk
+jadx-out/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# OS / editor
+.DS_Store
